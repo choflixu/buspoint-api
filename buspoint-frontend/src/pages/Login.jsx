@@ -6,6 +6,7 @@ import {
   signInWithPopup
 } from 'firebase/auth'
 import { auth, googleProvider } from '../firebase'
+import Logo from "../components/Logo.jsx";
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false)
@@ -49,9 +50,7 @@ export default function Login() {
 
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-600 rounded-2xl mb-4">
-            <span className="text-white text-2xl">🚌</span>
-          </div>
+            <Logo size={64} />
           <h1 className="text-2xl font-bold text-gray-900">BusPoint</h1>
           <p className="text-gray-500 text-sm mt-1">Tourist Bus Ticket Management</p>
         </div>

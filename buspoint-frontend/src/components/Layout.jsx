@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { MapPin, Ticket, LayoutDashboard, LogOut } from 'lucide-react'
+import { ReactComponent as Logo } from '../assets/logo.svg'
 
 const navItems = [
   { path: '/routes', label: 'Routes', icon: MapPin },
@@ -26,9 +27,7 @@ export default function Layout({ children }) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/routes" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white text-sm">
-                🚌
-              </div>
+                <Logo size={32} />
               <span className="font-bold text-gray-900">BusPoint</span>
             </Link>
 
@@ -40,7 +39,7 @@ export default function Layout({ children }) {
                   to={item.path}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                     location.pathname.startsWith(item.path)
-                      ? 'bg-brand-50 text-brand-600'
+                      ? 'bg-red-50 text-red-600'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                 >
@@ -78,7 +77,7 @@ export default function Layout({ children }) {
               to={item.path}
               className={`flex-1 flex flex-col items-center py-3 text-xs font-medium transition-colors ${
                 location.pathname.startsWith(item.path)
-                  ? 'text-brand-600'
+                  ? 'text-red-600'
                   : 'text-gray-500'
               }`}
             >
