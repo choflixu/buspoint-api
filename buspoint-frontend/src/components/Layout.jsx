@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { MapPin, Ticket, LayoutDashboard, LogOut } from 'lucide-react'
-import { ReactComponent as Logo } from '../assets/logo.svg'
+import Logo from "./Logo";
 
 const navItems = [
   { path: '/routes', label: 'Routes', icon: MapPin },
