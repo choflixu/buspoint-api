@@ -45,7 +45,16 @@ export default function Login() {
     const handleGoogle = async () => {
         setError('')
         try {
-            await signInWithPopup(auth, googleProvider)
+            const result = await signInWithPopup(auth, googleProvider)
+            const email = result.user.email
+            // Intentar login en backend con email de Google
+            try {
+                const res = await loginBackend(email, 'google-oauth-' + result.user.uid)
+                setJwtToken(res.data.token)
+                console.log('JWT guardado, rol:', res.data.role)
+            } catch (err) {
+                console.warn('Backend login failed:', err.response?.data || err.message)
+            }
             navigate('/routes')
         } catch (err) {
             setError(err.message.replace('Firebase: ', ''))
