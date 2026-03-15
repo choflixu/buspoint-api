@@ -1,17 +1,25 @@
 package com.buspoint.api.service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-@RequiredArgsConstructor
+@Slf4j
 public class MailService {
 
-    private final JavaMailSender mailSender;
+    @Autowired(required = false)
+    private JavaMailSender mailSender;
 
     public void sendPasswordResetEmail(String to, String token) {
+        if (mailSender == null) {
+            log.warn("Mail not configured — skipping password reset email to {}", to);
+            return;
+        }
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("BusPoint — Password Reset");
@@ -21,6 +29,10 @@ public class MailService {
     }
 
     public void sendTicketConfirmation(String to, String ticketId, String routeName) {
+        if (mailSender == null) {
+            log.warn("Mail not configured — skipping ticket confirmation email to {}", to);
+            return;
+        }
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("BusPoint — Booking Confirmed");
